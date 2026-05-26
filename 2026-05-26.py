@@ -270,7 +270,6 @@ letters = ["a", "b"]
 for n in nums:
     for l in letters:
         print(str(n) + l)
-    
 
 # Problem 4 (simple nested loop count)
 
