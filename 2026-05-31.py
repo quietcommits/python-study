@@ -69,3 +69,66 @@ for i in range(1, len(nums)):
     prev_direction = direction
 
 print(count)
+
+# Problem 4 (count increases)
+
+nums = [3, 5, 2, 7, 8, 4, 9]
+
+# Count how many times a number
+# is greater than the previous number.
+
+# Print the final count.
+
+count = 0
+
+for i in range(1, len(nums)):
+    if nums[i] > nums[i - 1]:
+        count += 1
+
+print(count)
+
+# Problem 5 (count decreases)
+
+nums = [8, 6, 7, 4, 3, 5, 2]
+
+# Count how many times a number
+# is smaller than the previous number.
+
+# Print the final count
+
+count = 0
+
+for i in range(1, len(nums)):
+    if nums[i] < nums[i - 1]:
+        count += 1
+
+print(count)
+
+# Problem 6 (track previous direction)
+
+nums = [1, 3, 5, 4, 2, 6, 8]
+
+# Direction rules:
+# current > previous -> "UP"
+# current < previous -> "DOWN"
+#
+# Count how many times
+# the direction changes.
+
+prev_direction = "FLAT"
+count = 0
+
+for i in range(1, len(nums)):
+    if nums[i] > nums[i - 1]:
+        direction = "UP"
+    elif nums[i] < nums[i - 1]:
+        direction = "DOWN"
+    else:
+        direction = "FLAT"
+
+    if prev_direction != "FLAT" and prev_direction != direction:
+        count += 1
+
+    prev_direction = direction
+
+print(count)
