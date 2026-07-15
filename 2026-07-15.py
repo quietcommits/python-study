@@ -1,148 +1,201 @@
-# Problem 1 (Longest MULTIPLE OF 3 streak)
+# Problem 1 (Largest sum of an increasing streak)
 
-nums = [3, 6, 9, 4, 12, 15, 18, 21, 5]
+nums = [2, 5, 8, 3, 6, 9, 12, 4]
 
-# A multiple of 3 streak is a sequence of
-# consecutive numbers where each number is a multiple of 3.
-# (It doesn't matter if it increases or decreases, just multiples of 3!)
+# An increasing streak is a sequence of
+# consecutive numbers where each number
+# is larger than the previous one.
 #
 # Task:
-# Find the length of the LONGEST multiple of 3 streak.
+# Find the LARGEST SUM among all
+# increasing streaks.
 #
-# Print the length.
-
-streak = 0
-longest = 0
-
-for n in nums:
-    if n % 3 == 0:
-        streak += 1
-    else:
-        streak = 0
-    if streak > longest:
-        longest = streak
-
-print(longest)
-
-# Problem 2 (Starting INDEX of the longest multiple of 5 streak)
-
-nums = [7, 5, 10, 15, 3, 20, 25, 30, 35, 4]
-
-# Task:
-# Find the STARTING INDEX of the longest 
-# consecutive sequence of numbers that are multiples of 5.
+# Example:
 #
-# Print the starting index.
-
-streak = 0
-longest = 0
-index = 0
-longest_index = 0
-
-if nums[0] % 5 == 0:
-    streak = 1
-    longest = 1
-    index = 0
-    longest_index = 0
-
-for i in range(1, len(nums)):
-    if nums[i] % 5 == 0:
-        if streak > 0:
-            streak += 1
-        else:
-            streak = 1
-            index = i
-    else:
-        streak = 0
-    if streak > longest:
-        longest = streak
-        longest_index = index
-
-print(longest_index)
-
-# Problem 3 (Longest strictly INCREASING streak - Any numbers)
-
-nums = [10, 20, 30, 15, 20, 25, 30, 40, 10]
-
-# An increasing streak is a sequence of consecutive numbers
-# where each number is strictly LARGER than the previous one.
-# (This time, it can be any number, not just even or odd!)
+# 2, 5, 8        sum = 15
+# 3, 6, 9, 12    sum = 30
+# 4              sum = 4
 #
-# Task:
-# Find the length of the LONGEST increasing streak.
-#
-# Print the length.
+# Print the sum.
 
-streak = 1
-longest = 1
+total = nums[0]
+largest = nums[0]
 
 for i in range(1, len(nums)):
     if nums[i] > nums[i-1]:
-        streak += 1
+        total += nums[i]
     else:
-        streak = 1
-    if streak > longest:
-        longest = streak
+        if total > largest:
+            largest = total
+        total = nums[i]
 
-print(longest)
+if total > largest:
+    largest = total
 
-# Problem 4 (Ending VALUE of the longest strictly DECREASING streak)
+print(largest)
 
-nums = [5, 4, 3, 6, 7, 5, 3, 1, 8]
+# Problem 2 (Smallest sum of a decreasing streak)
 
-# A decreasing streak is a sequence of consecutive numbers
-# where each number is strictly SMALLER than the previous one.
+nums = [12, 9, 6, 15, 11, 8, 4, 10]
+
+# A decreasing streak is a sequence of
+# consecutive numbers where each number
+# is smaller than the previous one.
 #
 # Task:
-# Print the VALUE where the longest decreasing streak ENDS.
+# Find the SMALLEST SUM among all
+# decreasing streaks.
 #
 # Example:
-# 5, 4, 3     ends with 3
-# 7, 5, 3, 1  ends with 1
 #
-# Output: 1
+# 12, 9, 6        sum = 27
+# 15, 11, 8, 4    sum = 38
+# 10              sum = 10
+#
+# Print the sum.
 
-streak = 1
-longest = 1
-value = nums[0]
-longest_value = nums[0]
+total = nums[0]
+smallest = float("inf")
 
 for i in range(1, len(nums)):
     if nums[i] < nums[i-1]:
-        streak += 1
-        value = nums[i]
+        total += nums[i]
     else:
-        streak = 1
-        value = nums[i]
-    if streak > longest:
-        longest = streak
-        longest_value = value
+        if total < smallest:
+            smallest = total
+        total = nums[i]
 
-print(longest_value)
+if total < smallest:
+    smallest = total
 
-# Problem 5 (Longest MULTIPLE OF 2 OR 3 streak)
+print(smallest)
 
-nums = [2, 4, 9, 15, 7, 8, 12, 6, 5]
+# Problem 3 (Starting value of the increasing streak with the largest sum)
 
+nums = [4, 7, 9, 3, 6, 10, 13, 5]
+
+# An increasing streak is a sequence of
+# consecutive numbers where each number
+# is larger than the previous one.
+#
 # Task:
-# Find the length of the LONGEST consecutive sequence of numbers 
-# where each number is EITHER a multiple of 2 OR a multiple of 3.
+# Print the STARTING VALUE of the
+# increasing streak that has the
+# LARGEST SUM.
 #
 # Example:
-# [2, 4, 9, 15] -> All are multiples of 2 or 3. (Length = 4)
-# [8, 12, 6]    -> All are multiples of 2 or 3. (Length = 3)
 #
-# Print the length.
+# 4, 7, 9         sum = 20
+# 3, 6, 10, 13    sum = 32
+# 5               sum = 5
+#
+# Output:
+# 3
 
-streak = 0
-longest = 0
+total = nums[0]
+largest = nums[0]
+value = nums[0]
+largest_value = nums[0]
 
-for n in nums:
-    if n % 2 == 0 or n % 3 == 0:
-        streak += 1
+for i in range(1, len(nums)):
+    if nums[i] > nums[i-1]:
+        total += nums[i]
     else:
-        streak = 0
-    if streak > longest:
-        longest = streak
+        if total > largest:
+            largest = total
+            largest_value = value
+        total = nums[i]
+        value = nums[i]
 
-print(longest)
+if total > largest:
+    largest = total
+    largest_value = value
+
+print(largest_value)
+
+# Problem 4 (Ending value of the decreasing streak with the smallest sum)
+
+nums = [14, 11, 8, 15, 10, 6, 3, 9]
+
+# A decreasing streak is a sequence of
+# consecutive numbers where each number
+# is smaller than the previous one.
+#
+# Task:
+# Print the ENDING VALUE of the
+# decreasing streak that has the
+# SMALLEST SUM.
+#
+# Example:
+#
+# 14, 11, 8      sum = 33 (ends with 8)
+# 15, 10, 6, 3   sum = 34 (ends with 3)
+# 9              sum = 9  (ends with 9)
+#
+# Output:
+# 9
+
+total = nums[0]
+smallest = float("inf")
+value = nums[0]
+smallest_value = nums[0]
+
+for i in range(1, len(nums)):
+    if nums[i] < nums[i-1]:
+        total += nums[i]
+        value = nums[i]
+    else:
+        if total < smallest:
+            smallest = total
+            smallest_value = value
+        total = nums[i]
+        value = nums[i]
+
+if total < smallest:
+    smallest = total
+    smallest_value = value
+
+print(smallest_value)
+
+# Problem 5 (Starting index of the increasing streak with the largest sum)
+
+nums = [5, 8, 10, 4, 7, 11, 15, 6]
+
+# An increasing streak is a sequence of
+# consecutive numbers where each number
+# is larger than the previous one.
+#
+# Task:
+# Print the STARTING INDEX of the
+# increasing streak that has the
+# LARGEST SUM.
+#
+# Example:
+#
+# 5, 8, 10        sum = 23 (starts at index 0)
+# 4, 7, 11, 15    sum = 37 (starts at index 3)
+# 6               sum = 6
+#
+# Output:
+# 3
+
+total = nums[0]
+largest = nums[0]
+index = 0
+largest_index = 0
+
+for i in range(1, len(nums)):
+    if nums[i] > nums[i-1]:
+        total += nums[i]
+    else:
+        if total > largest:
+            largest = total
+            largest_index = index
+        total = nums[i]
+        index = i
+
+if total > largest:
+    largest = total
+    largest_index = index
+
+print(largest_index)
